@@ -21,9 +21,9 @@ import os
 theme_description = {
 	'theme': 'electrical-and-electronic-engineering',
 	'letters': {
-		#'a':(0,1611), # DONE
-		#'b':(0,240), # DONE
-		#'c':(0,817), # DONE
+		#'a':(1118,1611),
+		'b':(161,240),
+		#'c':(0,817),
 		#'d':(0,615),
 		#'e':(0,724),
 		#'f':(0,396),
@@ -36,10 +36,10 @@ theme_description = {
 min_year = 2011
 
 def parse_page(theme, letter, page_number):
-	timeout = None 
+	timeout = None
 	if page_number % 10 == 0:
 		timeout = 60
-		print '<timout>'
+		print '<timout 60 sec>'
 	myurl = urllib2.urlopen('http://www.mendeley.com/research-papers/%s/miscellaneous/%s/%s/' % (theme, letter, str(page_number)), None, timeout)
 	html_doc = myurl.read()
 	outdir = './output/%s' % theme
@@ -57,17 +57,8 @@ def parse_page(theme, letter, page_number):
 			title_div = article.find('div', {'class':'title'})
 			title = title_div.a.contents[0]
 			
-			authors_span = article.find('span', {'class':'authors'})
-			author_spans = authors_span.find_all('span', {'class':'author'})
-			authors = ''
-			for span in author_spans:
-				authors += span.contents[0]+', '
-			authors = authors[:-2]
+			output.write('%s\t%s\t%s\n' % (page_number, year, title.encode('utf-8')))
 
-			output.write('%s\t%s\t%s\t%s\n' % (page_number, year, title.encode('utf-8'), authors.encode('utf-8')))
-
-	myurl.close()
-	output.close()
 	print letter, page_number, 'DONE'
 
 for letter in theme_description['letters']:
@@ -75,7 +66,8 @@ for letter in theme_description['letters']:
 	for page_number in range(pages_from, pages_to):
 		parse_page(theme_description['theme'], letter, page_number)
 
-
+myurl.close()
+output.close()
 
 
 # article metadata example
