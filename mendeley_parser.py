@@ -33,7 +33,10 @@ theme_description = {
 # ============================================================= #
 
 # min year for filter articles
+
 min_year = 2011
+
+# ============================================================= #
 
 def parse_page(theme, letter, page_number):
 	timeout = None 

@@ -18,5 +18,5 @@ Output csv file formst:
 page_number [tab] year [tab] title [tab] author [, ] author
 </pre>
 
-
+---
 BTW, they have API http://dev.mendeley.com/
