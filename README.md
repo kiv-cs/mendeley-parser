@@ -15,5 +15,8 @@ python mendeley_parser.py
 </pre>
 Output csv file formst:
 <pre>
-page_number [tab] year [tab] title
+page_number [tab] year [tab] title [tab] author [, ] author
 </pre>
+
+
+BTW, they have API http://dev.mendeley.com/
